@@ -6,6 +6,7 @@ from oneday.exceptions import NotRegisteredError
 
 class Service:
     services = {}
+    kwargs_dict = {}
 
     @classmethod
     def register(cls, original_class: Type):
@@ -15,12 +16,17 @@ class Service:
         for name, target_type in annotations.items():
             kwargs[name] = Component.get(target_type)
 
-        cls.services[original_class] = original_class(**kwargs)
+        cls.kwargs_dict[original_class] = kwargs
 
         return original_class
 
     @classmethod
     def create(cls, target_class: Type):
+        if target_class in cls.kwargs_dict:
+            cls.services[target_class] = target_class(
+                **cls.kwargs_dict[target_class])
+            cls.kwargs_dict.pop(target_class)
+
         if target_class in cls.services:
             return cls.services[target_class]
         else:

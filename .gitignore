@@ -174,3 +174,4 @@ dmypy.json
 htmlcov/
 
 coverage.xml
+.coverage
