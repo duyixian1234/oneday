@@ -14,7 +14,7 @@ class Service:
         kwargs = {}
 
         for name, target_type in annotations.items():
-            kwargs[name] = Component.get(target_type)
+            kwargs[name] = target_type
 
         cls.kwargs_dict[original_class] = kwargs
 
@@ -24,7 +24,11 @@ class Service:
     def create(cls, target_class: Type):
         if target_class in cls.kwargs_dict:
             cls.services[target_class] = target_class(
-                **cls.kwargs_dict[target_class])
+                **{
+                    name: Component.get(target_type)
+                    for name, target_type in
+                    cls.kwargs_dict[target_class].items()
+                })
             cls.kwargs_dict.pop(target_class)
 
         if target_class in cls.services:
