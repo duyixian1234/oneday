@@ -20,3 +20,11 @@ def test_component(A):
         Component.get(str)
 
     assert 'not added' in str(error)
+
+    class B:
+        def __init__(self, a: A):
+            self.a = a
+
+    b = Component.create(B)
+
+    assert b.a is a

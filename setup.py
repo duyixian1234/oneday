@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='oneday',
-    version='0.1.2',
+    version='0.2.0',
     author='Yixian Du',
     author_email='duyixian1234@qq.com',
     classifiers=[

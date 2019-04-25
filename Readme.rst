@@ -6,7 +6,7 @@ A Python DI/component project.
 Example
 -------
 
->>> from import Component, Service
+>>> from import Component
 >>> class A:
             pass
 >>> a = A()
@@ -17,7 +17,7 @@ True
      class B:
         def __init__(self, a: A):
             self.a = a
->>> b = Service.create(B)
+>>> b = Component.create(B)
 >>> b.a is a
 True
 
